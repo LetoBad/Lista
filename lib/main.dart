@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:listawidget/model/pessoa..dart';
+import 'package:listawidget/sextou.dart';
 
 void main() {
   runApp(const MyApp());
@@ -46,24 +47,28 @@ class _Tela1State extends State<Tela1> {
     Pessoa(nome: "Nikki", idade: 41, sobrenome: "Lauda", cpf: "4832347252"),
   ];
 
+  void removerItem(int index){
+    setState(() {
+      lista.removeAt(index);
+    });
+    
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("App Lista para Widget"),
-          backgroundColor: Colors.cyanAccent,
+          title: Text("Sextou?"),
+          backgroundColor: const Color.fromARGB(255, 4, 90, 90),
         ),
         body: ListView.builder(
           itemCount: lista.length,
           itemBuilder: (context, index) {
-            return Column(
-              children: [
-                ElevatedButton(
-                    onPressed: () {}, child: Text(lista[index].nome)),
-                SizedBox(
-                  height: 10,
-                )
-              ],
+            return Sextou(
+              nome :lista[index].nome,
+              sobrenome: lista[index].sobrenome,
+              onRemove: () => removerItem(index),
+
             );
           },
         ));
